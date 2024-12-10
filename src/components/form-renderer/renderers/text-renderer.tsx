@@ -14,7 +14,9 @@ const TextRenderer: React.FC<RendererProps> = ({
       <input
         type="text"
         value={value || ""}
-        onChange={(e) => onChange(path, e.target.value)}
+        onChange={(e) => {
+          return onChange(path, e.target.value);
+        }}
       />
     </div>
   );

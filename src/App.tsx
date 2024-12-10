@@ -1,21 +1,26 @@
-import React, { useState } from "react";
+// src/app.tsx
+import React from "react";
+import { useUnit } from "effector-react";
+import { $formData } from "./stores/form";
 import FormRenderer from "./components/form-renderer";
-import { formSchema } from "./models/form-schema";
-import { layoutSchema } from "./models/layout-schema";
 
-const App: React.FC = () => {
-  const [formData, setFormData] = useState({});
+const DisplayData: React.FC = () => {
+  const data = useUnit($formData);
 
   return (
     <div>
-      <h1>Form Example</h1>
-      <FormRenderer
-        schema={formSchema}
-        layout={layoutSchema}
-        initialData={{ nome: "Mario" }}
-        onChange={(data) => setFormData(data)}
-      />
-      <pre>{JSON.stringify(formData, null, 2)}</pre>
+      <h2>Form Data</h2>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <div>
+      <h1>Form Example with Effector</h1>
+      <FormRenderer />
+      <DisplayData />
     </div>
   );
 };
